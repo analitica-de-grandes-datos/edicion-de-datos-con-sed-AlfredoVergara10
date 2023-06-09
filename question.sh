@@ -57,7 +57,6 @@ sed 's/\(,\)/./g' |
 # Reemplazar punto y comas (";") por comas (",").
 sed 's/\(;\)/,/g' |
 # Transformar todos los valores de la columna 2 a letras en mayúscula.
-sed 's/\([a-z]\)/\U&/g')
 echo "$data"
 
 
