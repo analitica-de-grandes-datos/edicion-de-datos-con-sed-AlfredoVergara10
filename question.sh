@@ -52,11 +52,14 @@ sed ':a;N;$!ba;s/\n\([0-9]\)\//\n0\1\//g' |
 sed 's/\([0-9][0-9]\)\/\([0-9][0-9]\)\/\(20[0-9][0-9]\)/\3\-\2\-\1/g' |
 # Transformar todas las coincidiencias nulas entre ";" y ";" a ";\N;".
 sed 's/\(;N;\)\|\(;;\)\|\(;\\n;\)/;\\N;/g' |
+# Transformar todas las coincidencias nulas entre ";" y "\r" a "\N\r".
+sed 's/\(;\)\r\|\(;n\)\r/;\\N/g' |
 # Reemplazar coma decimal (",") por punto decimal (".").
 sed 's/\(,\)/./g' |
 # Reemplazar punto y comas (";") por comas (",").
 sed 's/\(;\)/,/g' |
 # Transformar todos los valores de la columna 2 a letras en mayúscula.
-echo "$data"
+sed 's/\([a-z]\)/\U&/g')
+$ bash question.sh data.csv > output.csv
 
 
