@@ -42,6 +42,7 @@
 #  >>> Escriba su codigo a partir de este punto <<<
 #
 
+import os
 # Convertir el año de "YY" a "YYYY".
 data=$(sed 's/\/\([0-9][0-9]\);/\/20\1;/g' data.csv 
 # Convertir el mes de "M" a "MM".
@@ -60,6 +61,7 @@ sed 's/\(,\)/./g' |
 sed 's/\(;\)/,/g' |
 # Transformar todos los valores de la columna 2 a letras en mayúscula.
 sed 's/\([a-z]\)/\U&/g')
-$ bash question.sh data.csv > output.csv
+echo "$data"
+
 
 
