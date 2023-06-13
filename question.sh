@@ -44,7 +44,7 @@
 
 
 # Convertir el año de "YY" a "YYYY".
-data=$(sed 's/\/\([0-9][0-9]\);/\/20\1;/g' data.csv 
+data=$ sed 's/\/\([0-9][0-9]\);/\/20\1;/g' data.csv 
 # Convertir el mes de "M" a "MM".
 sed 's/\/\([0-9]\)\//\/0\1\//g' data.csv
 # Convertir el día de "D" a "DD".
