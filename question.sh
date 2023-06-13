@@ -42,7 +42,6 @@
 #  >>> Escriba su codigo a partir de este punto <<<
 #
 
-
 # Convertir el año de "YY" a "YYYY".
 data=$(sed 's/\/\([0-9][0-9]\);/\/20\1;/g' data.csv 
 # Convertir el mes de "M" a "MM".
@@ -58,6 +57,5 @@ sed 's/\(;\)\r\|\(;n\)\r/;\\N/g' |
 # Reemplazar coma decimal (",") por punto decimal (".").
 sed 's/\(,\)/./g' |
 # Reemplazar punto y comas (";") por comas (",").
-sed 's/\(;\)/,/g' |
-# Transformar todos los valores de la columna 2 a letras en mayúscula.
-sed 's/\([a-z]\)/\U&/g')
+sed 's/\(;\)/,/g' )
+echo "$data"
