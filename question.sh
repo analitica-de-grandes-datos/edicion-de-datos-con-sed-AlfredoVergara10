@@ -61,5 +61,4 @@ sed 's/\(,\)/./g' |
 sed 's/\(;\)/,/g' |
 # Transformar todos los valores de la columna 2 a letras en mayúscula.
 sed 's/\([a-z]\)/\U&/g')
-echo "$data"
 
