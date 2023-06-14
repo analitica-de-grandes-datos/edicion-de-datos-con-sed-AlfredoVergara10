@@ -42,14 +42,21 @@
 #  >>> Escriba su codigo a partir de este punto <<<
 #
 
+# Convertir el año de "YY" a "YYYY".
+!sed 's/\/\([0-9][0-9]\);/\/20\1;/g' data.csv > data-0.csv
+# Convertir el mes de "M" a "MM".
+!sed 's/\/\([0-9]\)\//\/0\1\//g' data-0.csv > data-1.csv
+# Convertir el día de "D" a "DD".
+!sed ':a;N;$!ba;s/\n\([0-9]\)\//\n0\1\//g' data-1.csv > data-2.csv
 # Convertir las fechas de "DD/MM/YY" a "YYYY-MM-DD".
-data=$(sed 's/\([0-9][0-9]\)\/\([0-9][0-9]\)\/\(20[0-9][0-9]\)/\3\-\2\-\1/g' |
+!sed 's/\([0-9][0-9]\)\/\([0-9][0-9]\)\/\(20[0-9][0-9]\)/\3\-\2\-\1/g' data-2.csv > data-3.csv
 # Transformar todas las coincidiencias nulas entre ";" y ";" a ";\N;".
-sed 's/\(;N;\)\|\(;;\)\|\(;\\n;\)/;\\N;/g' |
+!sed 's/\(;N;\)\|\(;;\)\|\(;\\n;\)/;\\N;/g' data-3.csv > data-4.csv
 # Transformar todas las coincidencias nulas entre ";" y "\r" a "\N\r".
-sed 's/\(;\)\r\|\(;n\)\r/;\\N/g' |
+!sed 's/\(;\)\r\|\(;n\)\r/;\\N/g' data-4.csv > data-5.csv
 # Reemplazar coma decimal (",") por punto decimal (".").
-sed 's/\(,\)/./g' |
+!sed 's/\(,\)/./g' data-5.csv > data-6.csv
 # Reemplazar punto y comas (";") por comas (",").
-sed 's/\(;\)/,/g' )
-echo "$data"
+!sed 's/\(;\)/,/g' data-6.csv > data-7.csv
+# Transformar todos los valores de la columna 2 a letras en mayúscula.
+!sed 's/\([a-z]\)/\U&/g' data-7.csv > data-8.csv
