@@ -59,4 +59,4 @@ sed 's/\(,\)/./g' data-5.csv > data-6.csv
 # Reemplazar punto y comas (";") por comas (",").
 sed 's/\(;\)/,/g' data-6.csv > data-7.csv
 # Transformar todos los valores de la columna 2 a letras en mayúscula.
-sed 's/\([a-z]\)/\U&/g' data-7.csv > data-8.csv
+sed 's/\([a-z]\)/\U&/g' data-7.csv > output.csv
