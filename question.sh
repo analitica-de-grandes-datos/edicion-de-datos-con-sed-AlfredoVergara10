@@ -41,3 +41,24 @@
 #
 #  >>> Escriba su codigo a partir de este punto <<<
 #
+
+# Convertir el año de "YY" a "YYYY".
+sed 's/\/\([0-9][0-9]\);/\/20\1;/g' data.csv > data-0.csv
+# Convertir el mes de "M" a "MM".
+sed 's/\/\([0-9]\)\//\/0\1\//g' data-0.csv > data-1.csv
+# Convertir el día de "D" a "DD".
+sed ':a;N;$!ba;s/\n\([0-9]\)\//\n0\1\//g' data-1.csv > data-2.csv
+# Convertir las fechas de "DD/MM/YY" a "YYYY-MM-DD".
+sed 's/\([0-9][0-9]\)\/\([0-9][0-9]\)\/\(20[0-9][0-9]\)/\3\-\2\-\1/g' data-2.csv > data-3.csv
+# Transformar todas las coincidiencias nulas entre ";" y ";" a ";\N;".
+sed 's/\(;N;\)\|\(;;\)\|\(;\\n;\)/;\\N;/g' data-3.csv > data-4.csv
+# Transformar todas las coincidencias nulas al final de las filas 5, 6, 7.
+sed '5s/$/\\N/' data-4.csv > data-5.csv
+sed '6s/n/\\N/' data-5.csv > data-6.csv
+sed '7s/$/\\N/' data-6.csv > data-7.csv
+# Reemplazar coma decimal (",") por punto decimal (".").
+sed 's/\(,\)/./g' data-7.csv > data-8.csv
+# Reemplazar punto y comas (";") por comas (",").
+sed 's/\(;\)/,/g' data-8.csv > data-9.csv
+# Transformar todos los valores de la columna 2 a letras en mayúscula.
+sed 's/\([a-z]\)/\U&/g' data-9.csv > output.csv
