@@ -52,11 +52,13 @@ sed ':a;N;$!ba;s/\n\([0-9]\)\//\n0\1\//g' data-1.csv > data-2.csv
 sed 's/\([0-9][0-9]\)\/\([0-9][0-9]\)\/\(20[0-9][0-9]\)/\3\-\2\-\1/g' data-2.csv > data-3.csv
 # Transformar todas las coincidiencias nulas entre ";" y ";" a ";\N;".
 sed 's/\(;N;\)\|\(;;\)\|\(;\\n;\)/;\\N;/g' data-3.csv > data-4.csv
-# Transformar todas las coincidencias nulas entre ";" y "\r" a "\N\r".
-sed 's/\(;\)\r\|\(;n\)\r/;\\N/g' data-4.csv > data-5.csv
+# Transformar todas las coincidencias nulas al final de las filas 5, 6, 7.
+sed '5s/$/\\N/' data-4.csv > data-5.csv
+sed '6s/n/\\N/' data-5.csv > data-6.csv
+sed '7s/$/\\N/' data-6.csv > data-7.csv
 # Reemplazar coma decimal (",") por punto decimal (".").
-sed 's/\(,\)/./g' data-5.csv > data-6.csv
+sed 's/\(,\)/./g' data-7.csv > data-8.csv
 # Reemplazar punto y comas (";") por comas (",").
-sed 's/\(;\)/,/g' data-6.csv > data-7.csv
+sed 's/\(;\)/,/g' data-8.csv > data-9.csv
 # Transformar todos los valores de la columna 2 a letras en mayúscula.
-sed 's/\([a-z]\)/\U&/g' data-7.csv > output.csv
+sed 's/\([a-z]\)/\U&/g' data-9.csv > output.csv
